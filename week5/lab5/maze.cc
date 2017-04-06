@@ -286,6 +286,10 @@ void Maze::print( ostream &os ) const
             {
                 os << "|";
             }
+            else
+            {
+                os << " ";
+            }
         }
         os << endl;
     }
@@ -307,3 +311,35 @@ void Maze::print( ostream &os ) const
 }
 
 
+bool Maze::isInRange( int row, int col ) const
+{
+    return ( row < m_numRows && row >= 0 ) &&
+           ( col < m_numCols && col >= 0 );
+}
+
+bool Maze::isInRangeAfterAction( int row, int col, Direction direction ) const
+{
+    switch ( direction )
+    {
+        case Direction::SOUTH : row += 1; break;
+        case Direction::NORTH : row -= 1; break;
+        case Direction::WEST  : col -= 1; break;
+        case Direction::EAST  : col += 1; break;
+    }
+    return isInRange( row, col );
+}
+
+Location Maze::getLocationAfterAction( int row, int col, Direction direction ) const
+{
+    Location _result( row, col );
+
+    switch ( direction )
+    {
+        case Direction::SOUTH : _result.row += 1; break;
+        case Direction::NORTH : _result.row -= 1; break;
+        case Direction::WEST  : _result.col -= 1; break;
+        case Direction::EAST  : _result.col += 1; break;
+    }
+
+    return _result;
+}

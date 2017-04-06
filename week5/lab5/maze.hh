@@ -166,4 +166,10 @@ public:
     // |           | E |
     // +---+---+---+---+
     void print( ostream &os ) const;
+
+    bool isInRange( int row, int col ) const;
+
+    bool isInRangeAfterAction( int row, int col, Direction direction ) const;
+
+    Location getLocationAfterAction( int row, int col, Direction direction ) const;
 };
